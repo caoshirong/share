@@ -1,15 +1,12 @@
 # vite
 
-Vite，新型前端构建工具。主要由两部分组成：
+Vite，新型前端构建工具。一个基于浏览器原生 ES imports 的开发服务器。利用浏览器去解析 imports，在服务器端按需编译返回，完全跳过了打包这个概念，服务器随起随用。同时不仅有 Vue 文件支持，还搞定了热更新，而且热更新的速度不会随着模块增多而变慢。主要由两部分组成：
 
 - 一个开发服务器，它基于 原生 ES 模块 提供了 丰富的内建功能，如速度快到惊人的 模块热更新（HMR）。
 
 - 一套构建指令，它使用 Rollup 打包你的代码，并且它是预配置的，可以输出用于生产环境的优化过的静态资源。
 
-利用浏览器去解析 imports，在服务器端按需编译返回。
-浏览器开始原生支持 ES 模块，越来越多 JavaScript 工具使用编译型语言编写。
-
-#### 传统打包和 Vite 打包的直观区别
+#### 传统打包和 Vite 构建模式的直观区别
 
 ![blockchain](./images/bundler.png 'bundle based dev serve')
 ![blockchain](./images/esm.png 'native esm based dev server')
@@ -43,13 +40,26 @@ Vite，新型前端构建工具。主要由两部分组成：
 - Web Assembly
 - Web Worker
 - 构建优化
+
   - 动态导入 Polyfill
   - CSS 代码分割
   - 预加载指令生成
   - 异步 Chunk 加载优化
     ![blockchain](./images/graph.png)
-    `Entry ---> A ---> C`(在这种无优化的模式中会额外增加网络往返)
-    `Entry ---> (A + C)`()
+    在这种无优化的模式中会额外增加网络往返
+      <div style="padding: 20px; background: #fff;border-radius: 15px;margin: 10px 0;color:#000">`Entry ---> A ---> C`</div>
+      Vite 将使用一个预加载步骤自动重写代码，来分割动态导入调用
+      <div style="padding: 20px; background: #fff;border-radius: 15px;margin: 10px 0;color:#000">`Entry ---> (A + C)`</div>
+      Vite 的优化将跟踪所有的直接导入，无论导入深度如何，都完全消除不必要的往返。
+
+#### Vite 和 VueCli 的区别
+
+<div style="padding: 20px; background: #000;border-radius: 15px;margin: 10px 0">
+Vite在开发模式下不需要打包可以直接运行，使用的是ES6的模块化加载规则；
+VueCLI开发模式下必须对项目打包才可以运行；
+Vite基于缓存的热更新；
+VueCLI基于webpack的热更新；
+</div>
 
 #### Web packaging: 浏览器原生打包
 
