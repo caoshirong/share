@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Web Components</title>
+  </head>
+  <body>
+    <div style="margin-top: 100px;">
+      <popup-info img="./icon.png" text="这是一段测试代码！！！！！！">
+    </div>
+    <script src="./popup.js"></script>
+
+
+    <article contenteditable="">
+      <h2>Sample heading</h2>
+      <p is="word-count"></p>
+    </article>
+    <script src="./wordCount.js"></script>
+
+
+    <ul is="expanding-list">
+      <li>UK
+          <ul>
+              <li>Yorkshire
+                  <ul>
+                      <li>Leeds
+                          <ul>
+                              <li>Train station</li>
+                              <li>Town hall</li>
+                              <li>Headrow</li>
+                          </ul>
+                      </li>
+                      <li>Bradford</li>
+                      <li>Hull</li>
+                  </ul>
+              </li>
+          </ul>
+      </li>
+      <li>USA
+          <ul>
+              <li>California
+                  <ul>
+                      <li>Los Angeles</li>
+                      <li>San Francisco</li>
+                      <li>Berkeley</li>
+                  </ul>
+              </li>
+              <li>Nevada</li>
+              <li>Oregon</li>
+          </ul>
+      </li>
+  </ul>
+  
+  <ul>
+      <li>Not</li>
+      <li>an</li>
+      <li>expanding</li>
+      <li>list</li>
+  </ul>
+  <script src="./expandingList.js"></script>
+  
+
+  <div>
+    <button class="add">Add custom-square to DOM</button>
+    <button class="update">Update attributes</button>
+    <button class="remove">Remove custom-square from DOM</button>
+  </div>
+  <script src="./life-cycle-callback.js"></script>
+  </body>
+</html>

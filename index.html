@@ -1,0 +1,180 @@
+<html>
+  <head>
+    <script>
+      // 变量提升、作用域、隐式赋值（支持es6的浏览器）
+      console.log('变量提升、作用域、隐式赋值（支持es6的浏览器）')
+      var a = 1
+      if (a) {
+        // debugger
+        console.log(a, window.a)
+        a = 2
+        console.log(a, window.a)
+        function a() {
+        }
+        a = 3
+        console.log(a, window.a)
+      }
+      console.log(a, window.a)
+      console.log('变量提升、作用域、隐式赋值（支持es6的浏览器）')
+      console.log('原型链')
+      // 原型链
+      function A() {
+        this.name = 'A'
+        this.class = 'AClass'
+      }
+      A.prototype = {
+        name: 'APrototype',
+        class: 'APrototypeClass'
+      }
+      Object.prototype.class = 'ObjectPrototype'
+      Object.prototype.school = 'ObjectPrototypeSchool'
+      var a = new A()
+      a.name = 'a'
+      window.console.log(a.name)
+      window.console.log(a.class)
+      window.console.log(a.school)
+      console.log('原型链')
+      //Promise---改造依次输出姓名：test
+      /* function set1() {
+        setTimeout(function(){
+          console.log('test')
+        }, 1000)
+      }
+      function set2() {
+        setTimeout(function(){
+          console.log('姓名：')
+        }, 2000)
+      } */
+      console.log('Promise')
+      function set1() {
+        return new Promise(resolve=> {
+          setTimeout(function(){
+            resolve('test')
+          }, 1000)
+        })
+      }
+      function set2() {
+        return new Promise(resolve=> {
+          setTimeout(function(){
+            resolve('姓名：')
+          }, 2000)
+        })
+      }
+      // set2().then(res=> {
+      //   window.console.log(res)
+      //   return set1()
+      // }).then(res=>{
+      //   window.console.log(res)
+      // })
+
+      console.log('this')
+      // this
+      var aa = 2
+      var bb = {
+        aa: 4,
+        c: function() {
+          console.log(this.aa)
+          return function() {
+            console.log(this.aa)
+          }
+        },
+        d: () => {
+          console.log(this.aa)
+          return function() {
+            console.log(this.aa)
+          }
+        }
+      }
+      let aaa = bb.c()() // 4 2
+      let bbb = bb.c
+      bbb()() // 2 2
+      let ccc = bb.d()() // 2 2
+      let eee = bb.d
+      eee()() // 2 2
+      window.bb.c()() // 4 2
+      console.log('this')
+
+      // [1,[2,3,[4,5,6,[7,8,9]]]]=>[1,2,3,4,5,6,7,8,9]
+      var jsonArray = [
+        {
+          name: '1',
+          children: [
+            {
+              name: '1_1',
+              children: [
+                {
+                  name: '1_1_1'
+                },
+                {
+                  name: '1_1_2'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          name: '2',
+        }
+      ]
+      // 将该jsonArray转为
+      var arr = [ 
+        {
+          name: '1_1_1'
+        },
+        {
+          name: '1_1_2'
+        },
+        {
+          name: '2'
+        },
+      ]
+      function deepFlatter(arr) {
+        return [].concat(...arr.map(item =>{
+          return item.children && item.children.length > 0? deepFlatter(item.children) : item
+        }) )
+      }
+      console.log(deepFlatter(jsonArray))
+
+      // 正则
+      var reg = /^(\-)?\d+(\.\d{0,2})$/
+      window.console.log(reg.test('2222.4'))
+
+
+      setTimeout (() => { 
+          console.log(4)
+      })
+      new Promise (resolve => {
+          resolve()
+          console.log(1)
+      }).then (() => {
+        console.log(3)
+      })
+      console.log(2)
+      setTimeout (() => { 
+          console.log(5)
+      },0)
+
+    </script>
+  </head>
+  <body>
+    <style>
+      #bg_id>*{
+        background-color: blue;
+      }
+      #bg_id .bg_div{
+        background-color: red;
+      }
+      #bg_id>div{
+        background-color: black;
+      }
+      #bg {
+        background-color: purple;
+      }
+    </style>
+    <div id="bg_id" class="bg-class">
+      <div class="bg_div" style="height: 120px;" id="bg">
+        字体大小和背景色
+      </div>
+    </div>
+  </body>
+</html>
